@@ -1,38 +1,73 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <title>Sample Zoho Webform</title>
+  <meta charset="UTF-8" />
+  <title>Sample Zoho CRM Webform</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <style>
-    body { font-family: Arial; padding: 30px; background: #f5f6f8; }
-    iframe { width: 100%; height: 750px; border: 0; }
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f6f8;
+      margin: 0;
+      padding: 40px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #ffffff;
+      padding: 24px;
+      border-radius: 12px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+    }
+
+    h2 {
+      margin-top: 0;
+      margin-bottom: 16px;
+      font-size: 22px;
+    }
+
+    iframe {
+      width: 100%;
+      height: 660px;
+      border: none;
+      border-radius: 8px;
+    }
   </style>
 </head>
 <body>
 
-<h2>Zoho CRM Webform</h2>
+  <div class="container">
+    <h2>Contact Us</h2>
 
-<iframe
-src="https://crm.localzoho.com/crm/WebFormServeServlet?rid=2dfa302e68884e25b22d5fb4884594617e6d49fe6169be47ee78a9d0f53838fcb712c908c34518ea2f4ff8433bd4d49fgidf310fa15c0f25aa5032c72c34b42306fb86dc3f8daf383ae2ba9ffd74b79c914">
-</iframe>
+    <!-- Zoho CRM Webform Iframe -->
+    <iframe
+      src="https://crm.localzoho.com/crm/WebFormServeServlet?rid=cb9573d8c14427059811606b0acac0752aa1bfc7b42c79245be0d4ad90bb45b49da5109e39b4a7ec6085ff37aa62c758gidfbfc50144fca9fffae309e1ed2c22d7391d92e2d5c83b7501787d29d52bc883c"
+      title="Zoho CRM Webform"
+      loading="lazy">
+    </iframe>
+  </div>
 
-<script>
-function wfa_pstMesgFrmFom(evt){
-  if (evt.origin === 'https://crm.localzoho.com') {
-    var loc_obj = JSON.stringify({
-      origin: window.location.origin,
-      pathname: window.location.pathname,
-      search: window.location.search,
-      hash: window.location.hash
-    });
-    evt.source.postMessage(
-      'prnt_wnd_pg_lc_rc_frm_prwindow_' + loc_obj,
-      evt.origin
-    );
-  }
-}
-window.addEventListener('message', wfa_pstMesgFrmFom, false);
-</script>
+  <!-- Zoho postMessage handler (required for iframe forms) -->
+  <script>
+    function wfa_pstMesgFrmFom(evt) {
+      if (evt.origin === "https://crm.localzoho.com") {
+        var loc_obj = JSON.stringify({
+          origin: window.location.origin,
+          pathname: window.location.pathname,
+          search: window.location.search,
+          hash: window.location.hash
+        });
+        evt.source.postMessage(
+          "prnt_wnd_pg_lc_rc_frm_prwindow_" + loc_obj,
+          evt.origin
+        );
+      }
+    }
+
+    window.addEventListener("message", wfa_pstMesgFrmFom, false);
+  </script>
 
 </body>
 </html>
