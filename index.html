@@ -1,74 +1,38 @@
 <!doctype html>
-<html lang="en">
+<html>
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Sample Zoho CRM Webform</title>
+  <title>Sample Zoho Webform</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 32px;
-      background: #f5f6f8;
-    }
-    .card {
-      max-width: 980px;
-      margin: 0 auto;
-      background: #fff;
-      border-radius: 14px;
-      padding: 20px;
-      box-shadow: 0 6px 18px rgba(0,0,0,.08);
-    }
-    h2 {
-      margin: 0 0 12px 0;
-      font-size: 20px;
-    }
-    .hint {
-      margin: 0 0 18px 0;
-      color: #666;
-      font-size: 14px;
-    }
-    iframe {
-      width: 100%;
-      height: 720px; /* you can change this */
-      border: 0;
-      border-radius: 10px;
-    }
+    body { font-family: Arial; padding: 30px; background: #f5f6f8; }
+    iframe { width: 100%; height: 750px; border: 0; }
   </style>
 </head>
 <body>
 
-  <div class="card">
-    <h2>Contact Us</h2>
-    <p class="hint">This page embeds a Zoho CRM Webform via iframe.</p>
+<h2>Zoho CRM Webform</h2>
 
-    <iframe
-      src="https://crm.localzoho.com/crm/WebFormServeServlet?rid=2dfa302e68884e25b22d5fb4884594617e6d49fe6169be47ee78a9d0f53838fcb712c908c34518ea2f4ff8433bd4d49fgidf310fa15c0f25aa5032c72c34b42306fb86dc3f8daf383ae2ba9ffd74b79c914"
-      title="Zoho CRM Webform"
-      loading="lazy"
-      referrerpolicy="no-referrer-when-downgrade"
-      allow="clipboard-read; clipboard-write">
-    </iframe>
-  </div>
+<iframe
+src="https://crm.localzoho.com/crm/WebFormServeServlet?rid=2dfa302e68884e25b22d5fb4884594617e6d49fe6169be47ee78a9d0f53838fcb712c908c34518ea2f4ff8433bd4d49fgidf310fa15c0f25aa5032c72c34b42306fb86dc3f8daf383ae2ba9ffd74b79c914">
+</iframe>
 
-  <script>
-    function wfa_pstMesgFrmFom(evt) {
-      // Allow messages only from Zoho CRM domain used in iframe
-      if (evt.origin === "https://crm.localzoho.com") {
-        var loc_obj = JSON.stringify({
-          origin: window.location.origin,
-          pathname: window.location.pathname,
-          search: window.location.search,
-          hash: window.location.hash
-        });
-        evt.source.postMessage(
-          "prnt_wnd_pg_lc_rc_frm_prwindow_" + loc_obj,
-          evt.origin
-        );
-      }
-    }
-    window.addEventListener("message", wfa_pstMesgFrmFom, false);
-  </script>
+<script>
+function wfa_pstMesgFrmFom(evt){
+  if (evt.origin === 'https://crm.localzoho.com') {
+    var loc_obj = JSON.stringify({
+      origin: window.location.origin,
+      pathname: window.location.pathname,
+      search: window.location.search,
+      hash: window.location.hash
+    });
+    evt.source.postMessage(
+      'prnt_wnd_pg_lc_rc_frm_prwindow_' + loc_obj,
+      evt.origin
+    );
+  }
+}
+window.addEventListener('message', wfa_pstMesgFrmFom, false);
+</script>
 
 </body>
 </html>
